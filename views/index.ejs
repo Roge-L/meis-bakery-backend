@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,
+        initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Upload Cake</title>
+    </head>
+
+    <body>
+        <h1>Upload Cake to DB</h1>
+        <div>
+            <form action="/upload" method="POST"
+            enctype="multipart/form-data">
+                <input type="file" name="file" id="file">
+                <label for="file">Choose File</label>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div>
+            <% if (files) { %>
+                <% files.forEach(function(file) { %>
+                    <div>
+                    <img src="cakes/<%= file.filename %>" alt="" style="width: 100px; object-fit: cover;">
+                    <form action="delete/<%= file.filename %>?_method=DELETE" method="POST">
+                        <%= file.filename %>
+                        <button>Delete</button>
+                    </form>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p>no files found</p>
+            <% } %>
+        </div>
+    </body>
+</html>
